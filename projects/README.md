@@ -4,7 +4,9 @@ A list of the developed projects through the learning.
 
 ## Table of Contents
 
-1. [1649947510-cards](./04-14-2022-cards/)
+1. [cards](./1649950706-cards/)
+2. [identicon](./1649951475-identicon/)
+3. [chat](./1649970912-chat/)
 
 ## Convention
 
