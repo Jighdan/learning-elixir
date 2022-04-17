@@ -6,3 +6,4 @@ A repository to keep track of my road map while learning Elixir lang it's ecosys
 
 0. [Docs](./docs/)
 1. [Projects](./projects/)
+2. [Templates](./templates/)
