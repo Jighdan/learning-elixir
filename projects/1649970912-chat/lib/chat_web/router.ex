@@ -18,6 +18,8 @@ defmodule ChatWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/login", PageController, :login
+    get "/sign-up", PageController, :sign_up
   end
 
   # Other scopes may use custom stacks.
