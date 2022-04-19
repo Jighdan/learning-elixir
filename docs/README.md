@@ -5,6 +5,8 @@ A list of `.md` documents representing a log of what was learned + notes.
 ## Table of Contents
 
 1. [04-14-2022](./04-14-2022.md)
+2. [04-17-2022](./04-17-2022.md)
+3. [04-18-2022](./04-18-2022.md)
 
 ## Convention
 
