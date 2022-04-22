@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :rumbl, Rumbl.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "admin",
+  password: "rumbl-db",
   hostname: "localhost",
-  database: "rumbl_dev",
+  database: "rumbl",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
