@@ -1,6 +1,7 @@
 {
 	"cSpell.words": [
 		"defmodule",
+		"Ecto",
 		"struct",
 		"Structs"
 	]
