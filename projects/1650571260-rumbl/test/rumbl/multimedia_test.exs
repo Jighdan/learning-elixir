@@ -1,68 +1,47 @@
 defmodule Rumbl.MultimediaTest do
-  use Rumbl.DataCase
+  use Rumbl.DataCase, async: true
 
   alias Rumbl.Multimedia
+  alias Rumbl.Multimedia.Video
+  alias Rumbl.Multimedia.Category
 
   describe "videos" do
-    alias Rumbl.Multimedia.Video
-
-    import Rumbl.MultimediaFixtures
-
-    @invalid_attrs %{description: nil, title: nil, url: nil}
+    @valid_attrs %{description: "desc", title: "title", url: "http://local"}
 
     test "list_videos/0 returns all videos" do
-      video = video_fixture()
-      assert Multimedia.list_videos() == [video]
+      owner = user_fixture()
+      %Video{id: id1} = video_fixture(owner)
+      assert [%Video{id: ^id1}] = Multimedia.list_videos()
+
+      %Video{id: id2} = video_fixture(owner)
+      assert [%Video{id: ^id1}, %Video{id: ^id2}] = Multimedia.list_videos()
     end
 
-    test "get_video!/1 returns the video with given id" do
-      video = video_fixture()
-      assert Multimedia.get_video!(video.id) == video
+    test "get_video!/1 returns the video with the given id" do
+      owner = user_fixture()
+      %Video{id: id} = video_fixture(owner)
+      assert %Video{id: ^id} = Multimedia.get_video!(id)
     end
 
-    test "create_video/1 with valid data creates a video" do
-      valid_attrs = %{description: "some description", title: "some title", url: "some url"}
-
-      assert {:ok, %Video{} = video} = Multimedia.create_video(valid_attrs)
-      assert video.description == "some description"
-      assert video.title == "some title"
-      assert video.url == "some url"
+    test "create_video/2 with valid data creates a video" do
+      owner = user_fixture()
+      assert {:ok, %Video{} = _video} = Multimedia.create_video(owner, @valid_attrs)
     end
+  end
 
-    test "create_video/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Multimedia.create_video(@invalid_attrs)
-    end
+  describe "categories" do
+    test "list_categories_alphabetically/0" do
+      for name <- ~w(Drama Action Comedy) do
+        Multimedia.create_category!(name)
+      end
 
-    test "update_video/2 with valid data updates the video" do
-      video = video_fixture()
+      alpha_names =
+        for %Category{name: name} <-
+              Multimedia.list_categories_alphabetically() do
+          name
+        end
 
-      update_attrs = %{
-        description: "some updated description",
-        title: "some updated title",
-        url: "some updated url"
-      }
-
-      assert {:ok, %Video{} = video} = Multimedia.update_video(video, update_attrs)
-      assert video.description == "some updated description"
-      assert video.title == "some updated title"
-      assert video.url == "some updated url"
-    end
-
-    test "update_video/2 with invalid data returns error changeset" do
-      video = video_fixture()
-      assert {:error, %Ecto.Changeset{}} = Multimedia.update_video(video, @invalid_attrs)
-      assert video == Multimedia.get_video!(video.id)
-    end
-
-    test "delete_video/1 deletes the video" do
-      video = video_fixture()
-      assert {:ok, %Video{}} = Multimedia.delete_video(video)
-      assert_raise Ecto.NoResultsError, fn -> Multimedia.get_video!(video.id) end
-    end
-
-    test "change_video/1 returns a video changeset" do
-      video = video_fixture()
-      assert %Ecto.Changeset{} = Multimedia.change_video(video)
+      assert alpha_names == ~w(Action Comedy Drama)
     end
   end
 end

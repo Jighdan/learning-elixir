@@ -123,7 +123,7 @@ defmodule Rumbl.Multimedia do
 
   def list_categories_alphabetically do
     Category
-      |> Category.alphabetical()
-      |> Repo.all()
+    |> Category.alphabetical()
+    |> Repo.all()
   end
 end
