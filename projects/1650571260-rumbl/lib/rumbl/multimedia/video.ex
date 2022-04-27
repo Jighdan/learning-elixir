@@ -2,6 +2,7 @@ defmodule Rumbl.Multimedia.Video do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @primary_key {:id, Rumbl.Multimedia.Permalink, autogenerate: true}
   schema "videos" do
     field :description, :string
     field :title, :string
@@ -26,6 +27,7 @@ defmodule Rumbl.Multimedia.Video do
   defp slugify_title(changeset) do
     case fetch_change(changeset, :title) do
       {:ok, new_title} -> put_change(changeset, :slug, slugify(new_title))
+      :error -> changeset
     end
   end
 
