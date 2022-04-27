@@ -16,8 +16,7 @@ defmodule Rumbl.Accounts.User do
     |> cast(attrs, [:name, :username])
     |> validate_required([:name, :username])
     |> unique_constraint(:username,
-      name: :users_username_index,
-      message: "Username has already been taken"
+      name: :users_username_index
     )
     |> validate_length(:username, min: 1, max: 20)
   end
