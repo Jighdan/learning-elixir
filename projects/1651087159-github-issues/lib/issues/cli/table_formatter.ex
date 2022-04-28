@@ -9,7 +9,7 @@ defmodule Issues.CLI.TableFormatter do
     end
   end
 
-  defp split_into_columns(rows, headers) do
+  def split_into_columns(rows, headers) do
     for header <- headers do
       for row <- rows, do: printable(row[header])
     end
@@ -18,12 +18,13 @@ defmodule Issues.CLI.TableFormatter do
   defp printable(str) when is_binary(str), do: str
   defp printable(str), do: to_string(str)
 
-  defp widths_of(columns) do
+  @spec widths_of(any) :: list
+  def widths_of(columns) do
     for column <- columns, do: column |> Enum.map(&String.length/1) |> Enum.max()
   end
 
-  defp format_for(column_widths) do
-    Enum.map_join(column_widths, "-+-", &List.duplicate("-", &1))
+  def format_for(column_widths) do
+    Enum.map_join(column_widths, " | ", &"~-#{&1}s") <> "~n"
   end
 
   defp separator(column_widths) do
