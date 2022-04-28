@@ -13,6 +13,7 @@ A list of `.md` documents representing a log of what was learned + notes.
 7. [04-22-2022](./04-22-2022.md)
 8. [04-25-2022](./04-25-2022.md)
 9. [04-26-2022](./04-26-2022.md)
+10. [04-27-2022](./04-27-2022.md)
 
 ## Convention
 
