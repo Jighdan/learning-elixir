@@ -8,7 +8,7 @@ defmodule Issues.CLI do
   alias Issues.CLI.ArgsParser
   alias Issues.CLI.Process
 
-  def run(argv) do
+  def main(argv) do
     argv |> ArgsParser.parse() |> Process.process()
   end
 end
